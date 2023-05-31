@@ -149,7 +149,7 @@ int main() {
 			}
 			if ((dealer.score > 21) && !hasPair(&dealer_stack)) {
 				burst++;
-				score--;
+				score++;
 			}
 			if (burst) {
 				switch(score) {
@@ -157,6 +157,17 @@ int main() {
 					case 0: printf("\n\n무승부!!"); break;				// 여기서 점수 산정 함수를 추가해야 함. 
 					case -1: printf("\n\nDealer Win!"); break;
 					default: error("burst error");
+				}
+				break;
+			}
+			if (player.state == STAND && dealer.state == STAND) {
+				int score_difference = abs(player.score - 20.9) - abs(dealer.score -20.9);
+				if (score_difference < 0) {
+					printf("\n\nPlayer Win!");
+				} else if (score_difference > 0) {
+					printf("\n\nDealer Win!");
+				} else {
+					printf("\n\n무승부!!");
 				}
 				break;
 			}
@@ -170,7 +181,6 @@ int main() {
 					printf(" => %d점", player.score);
 					printf("\n버스트: %d, 스코어: %d", burst, score);	
 				}
-
 			}
 			if (dealer.state == HIT) {
 				printf("\n====================\nDealer Turn, ");
@@ -180,9 +190,8 @@ int main() {
 					peek(&deck);
 					draw(&deck, &dealer_stack, &dealer);
 					printf(" => %d점", dealer.score);
-					printf("\n버스트: %d, 스코어: %d", burst, score);				
+					printf("\n버스트: %d, 스코어: %d", burst, score);
 				}
-
 			}
 		} 
 		printf("\n계속하시겠습니까? "); scanf("%d", &isContinue);
