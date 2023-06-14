@@ -292,6 +292,10 @@ void write_fnd(int dev, int dealer_score, int player_score) {
 	write(dev, fnd_char, sizeof(fnd_char));
 }
 
+void write_lcd(int dev, char message*) {
+	write(dev, message, strlen(message)); // ¶Ç´Â MAX_CLCD_CHAR
+}
+
 //unsigned char get_tact(int tmo) {
 //	unsigned char b;
 //	if (tmo) {
